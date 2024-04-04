@@ -8,6 +8,7 @@ from app.parser import parse_table
 from app.database import save_to_database
 from app.csv_writer import write_to_csv
 
+
 def main():
     url = 'https://rosseti-lenenergo.ru/planned_work/'
     page_num = 1
@@ -44,6 +45,7 @@ def main():
     plt.ylabel('Count')
     plt.xticks(rotation=0)
     plt.show()
+
 
 if __name__ == "__main__":
     main()
