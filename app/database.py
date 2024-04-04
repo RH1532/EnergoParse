@@ -23,10 +23,10 @@ def save_to_database(data):
             region VARCHAR,
             district VARCHAR,
             address VARCHAR,
-            start_date TIMESTAMP,
-            start_time TIME,  -- Изменено на TIME
-            end_date TIMESTAMP,
-            end_time TIME,    -- Изменено на TIME
+            start_date DATE,
+            start_time TIME,
+            end_date DATE,
+            end_time TIME,
             type_of_work VARCHAR,
             res VARCHAR,
             other VARCHAR,
@@ -41,7 +41,7 @@ def save_to_database(data):
         cur.execute("""
             INSERT INTO planned_work (region, district, address, start_date, start_time, end_date, end_time, type_of_work, res, other, fias)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, (row[0], row[1], row[2], start_datetime.date(), start_datetime.time(), end_datetime.date(), end_datetime.time(), row[6], row[7], row[8], row[9]))
+        """, (row[0], row[1], row[2], start_datetime.date(), start_datetime.time(), end_datetime.date(), end_datetime.time(), row[7], row[8], row[9], row[10]))
 
     conn.commit()
     cur.close()
