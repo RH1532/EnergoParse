@@ -1,4 +1,3 @@
-# database.py
 import psycopg2
 
 def save_to_database(data):

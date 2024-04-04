@@ -1,4 +1,3 @@
-# csv_writer.py
 import csv
 
 def write_to_csv(data, filename):
