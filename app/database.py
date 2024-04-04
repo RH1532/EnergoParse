@@ -1,4 +1,5 @@
 import psycopg2
+from datetime import datetime
 
 def save_to_database(data):
     DB_NAME = 'postgres'
@@ -23,18 +24,24 @@ def save_to_database(data):
             district VARCHAR,
             address VARCHAR,
             start_date TIMESTAMP,
+            start_time TIME,  -- Изменено на TIME
             end_date TIMESTAMP,
+            end_time TIME,    -- Изменено на TIME
             type_of_work VARCHAR,
             res VARCHAR,
-            other VARCHAR
+            other VARCHAR,
+            fias VARCHAR
         )
     """)
 
     for row in data:
+        start_datetime = datetime.strptime(row[3], '%d-%m-%Y %H:%M')
+        end_datetime = datetime.strptime(row[5], '%d-%m-%Y %H:%M')
+
         cur.execute("""
-            INSERT INTO planned_work (region, district, address, start_date, end_date, type_of_work, res, other)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-        """, (row[0], row[1], row[2], row[3], row[5], row[6], row[7], row[8]))
+            INSERT INTO planned_work (region, district, address, start_date, start_time, end_date, end_time, type_of_work, res, other, fias)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (row[0], row[1], row[2], start_datetime.date(), start_datetime.time(), end_datetime.date(), end_datetime.time(), row[6], row[7], row[8], row[9]))
 
     conn.commit()
     cur.close()
