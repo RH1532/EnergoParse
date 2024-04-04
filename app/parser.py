@@ -13,7 +13,7 @@ def parse_table(url, page):
         cols = row.find_all(['th', 'td'])
         cols = [col.text.strip() for col in cols]
         if len(cols) >= 7:
-            start_date = datetime.strptime(cols[3], '%d-%m-%Y').date()  # Change here
+            start_date = datetime.strptime(cols[3], '%d-%m-%Y').date()
             if current_date <= start_date <= current_date + timedelta(days=7):
                 cols[3] = cols[3] + ' ' + cols[4]
                 cols[5] = cols[5] + ' ' + cols[6]
